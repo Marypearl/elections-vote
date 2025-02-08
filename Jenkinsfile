@@ -13,7 +13,8 @@ pipeline {
         }
         stage('Deploy Container') {
             steps {
-                sh 'docker run -d --name elections-vote-app --network front-tier --network back-tier -p 5000:80 elections-vote-app'
+                sh 'docker run -d --name elections-vote-app --network front-tier -p 5000:80 elections-vote-app'
+                sh 'docker network connect back-tier elections-vote-app'
             }
         }
     }
